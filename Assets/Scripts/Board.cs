@@ -16,6 +16,8 @@ public sealed class Board : MonoBehaviour
 
     public Row[] rows;
 
+    public Timer timer;
+
     public Tile[,] Tiles { get; private set; }
 
     public int Width => Tiles.GetLength(0);
@@ -150,10 +152,11 @@ public sealed class Board : MonoBehaviour
 
                 ScoreCounter.Instance.Score += tile.item.value * connectedTiles.Count;
 
+                Timer.Instance.ResetTime();
+
                 await deflateSequence.Play()
                                                 .AsyncWaitForCompletion();
 
-               
 
                 var inflateSequence = DOTween.Sequence();
 
@@ -170,7 +173,11 @@ public sealed class Board : MonoBehaviour
 
                 x = 0;
                 y = 0;
+                
             }
         }
+
+        
+
     }
 }
