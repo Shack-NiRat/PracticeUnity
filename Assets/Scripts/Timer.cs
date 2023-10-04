@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public sealed class Timer : MonoBehaviour
 {
 
@@ -39,8 +40,17 @@ public sealed class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+
+                SaveScore();
+
+                SceneManager.LoadScene("Menu", LoadSceneMode.Single);
             }
         }
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetFloat("PlayerScore", ScoreCounter.Instance.Score);
     }
 
     public void ResetTime()
